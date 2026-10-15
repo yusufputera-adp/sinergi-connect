@@ -3,12 +3,14 @@
 // POST {aksi:"reaksi", id, nilai:1|-1|0, token} | {aksi:"komentar", id, nama, teks, token, situs}
 import crypto from "node:crypto";
 import { dataStore, semuaRedaksi, garam, json, gagal, sha } from "../lib/inti.mjs";
+import statis from "../lib/berita-statis.mjs";
 
 const BATAS_KOMENTAR = 5, BATAS_MS = 10 * 60e3, PANJANG_MAKS = 1000;
 const KATA_TERLARANG = []; // contoh: ["kata1","kata2"]
 
 const kunciData = (id) => `interaksi/${id}.json`;
 async function beritaAda(id) {
+  if (/^s-[a-z0-9-]{1,80}$/.test(id || "")) return statis.some((b) => b.id === id && (b.terbit || 0) <= Date.now());
   const m = /^r([a-f0-9]{12})$/.exec(id || ""); if (!m) return false;
   return (await semuaRedaksi()).some((b) => b.id === m[1] && (b.terbit || 0) <= Date.now());
 }

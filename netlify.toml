@@ -3,7 +3,7 @@
 # berjalan baik bila berkas diunggah dalam folder (public/, netlify/) maupun
 # semuanya di tingkat atas repositori.
 [build]
-  command = "mkdir -p public netlify/functions netlify/lib; for f in index.html admin.html ekosistem.json; do [ -f \"$f\" ] && cp -f \"$f\" public/; done; for f in admin.mjs berita.mjs berita-terjadwal.mjs gambar.mjs interaksi.mjs redaksi.mjs; do [ -f \"$f\" ] && cp -f \"$f\" netlify/functions/; done; [ -f inti.mjs ] && cp -f inti.mjs netlify/lib/; ls public netlify/functions netlify/lib"
+  command = "mkdir -p public netlify/functions netlify/lib; for f in index.html admin.html ekosistem.json; do [ -f \"$f\" ] && cp -f \"$f\" public/; done; for f in admin.mjs berita.mjs berita-terjadwal.mjs gambar.mjs interaksi.mjs redaksi.mjs; do [ -f \"$f\" ] && cp -f \"$f\" netlify/functions/; done; [ -f inti.mjs ] && cp -f inti.mjs netlify/lib/; node susun-berita.mjs; ls public netlify/functions netlify/lib"
   publish = "public"
   functions = "netlify/functions"
 
