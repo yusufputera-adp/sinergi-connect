@@ -139,6 +139,8 @@ main{padding-block:14px 56px}
 .hero .tag{background:var(--grad-gold);color:var(--gold-ink);padding:5px 12px;border-radius:999px;align-self:flex-start}
 .hero .time,.hero .via{color:#DCE4F2}
 .subs{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.kabar{margin-bottom:32px}
+.subs.kabar-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 .sub{display:flex;flex-direction:column;gap:7px;min-width:0}
 .sub .ttl{font-family:var(--disp);font-size:16.5px;font-weight:600;line-height:1.28}
 
@@ -364,6 +366,7 @@ footer .logo{color:#fff}
   .subnav .wrap{padding-block:10px 2px}
   .subs{display:grid;grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:minmax(220px,72%);overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding-bottom:6px;scrollbar-width:none;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
   .subs::-webkit-scrollbar{display:none}
+  .subs.kabar-grid{grid-template-columns:none}
   .sub{scroll-snap-align:start;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:10px;box-shadow:var(--shadow)}
   .hero{min-height:340px;border-radius:var(--r)}
   .hero .ov{padding:70px 18px 18px}
@@ -673,6 +676,7 @@ function pageHome(){
     ${wrap(hero,"hero",`${coverHTML(hero)}<div class="ov"><span class="tag">${esc(hero.rubrik)}</span><h1 class="ttl">${esc(hero.judul)}</h1><span class="time">${hero.luar?`Baca di ${esc(hero.media)} ↗`:esc(hero.penulis)} · ${ago(hero.terbit)}${hero.demo?' <span class="demo">CONTOH</span>':""}</span></div>`)}
     <div class="subs">${subs.map(a=>wrap(a,"sub",`${coverHTML(a)}<div>${meta(a)}</div><h3 class="ttl">${esc(a.judul)}</h3><span class="time">${ago(a.terbit)}</span>`)).join("")}</div>
   </section>
+  ${kabarRedaksi()}
   <section class="eco">${NET}
     <div><h2>Portal Ekosistem <span>Koperasi &amp; UMKM</span></h2><p>Temukan mitra, tawarkan kerja sama, dan ikuti agenda komunitas koperasi dan pelaku UMKM dalam satu tempat.</p></div>
     <div class="stats">
@@ -697,6 +701,12 @@ function updLine(){
   if(DEPLOY.standalone&&S.newsErr)return `<div class="banner">Berita trending belum dapat dimuat. Pastikan situs di-deploy bersama folder netlify/functions.</div>`;
   const last=S.updated||Math.max(0,...S.trending.map(t=>t.dibuat||0));
   return last?`<p class="time" style="margin:-6px 0 12px">Fokus ekonomi, koperasi &amp; UMKM · diperbarui otomatis setiap 6 jam · terakhir ${fmtTgl(last)}, ${fmtJam(last)}</p>`:"";
+}
+function kabarRedaksi(){
+  const own=pubTerbit().slice().sort((a,b)=>b.terbit-a.terbit).slice(0,4);
+  if(!own.length)return "";
+  return `<section class="kabar"><div class="sh"><h2>Kabar Redaksi</h2><button class="lnk" data-kabar>Semua berita redaksi ›</button></div>
+    <div class="subs kabar-grid">${own.map(a=>wrap(a,"sub",`${coverHTML(a)}<div>${meta(a)}</div><h3 class="ttl">${esc(a.judul)}</h3><span class="time">${fmtTgl(a.terbit)}</span>`)).join("")}</div></section>`;
 }
 function pageList(title,list){
   return `<div class="cols"><section><div class="sh"><h2>${esc(title)}</h2></div>
@@ -1181,11 +1191,12 @@ function render(){
   renderNav();renderTicker();
   const m=$("#main");
   if(!S.loaded&&!["gabung","pedoman"].includes(S.view)){m.innerHTML=`<div class="empty"><strong>Memuat…</strong>Mohon tunggu sebentar.</div>`;return;}
-  const V={home:pageHome,rubrik:()=>pageList(S.rubrik,items().filter(a=>a.rubrik===S.rubrik)),cari:pageCari,baca:pageArticle,direktori:pageDirektori,peluang:pagePeluang,agenda:pageAgenda,pedoman:pagePedoman,gabung:pageGabung,admin:pageAdmin};
+  const V={home:pageHome,rubrik:()=>pageList(S.rubrik,items().filter(a=>a.rubrik===S.rubrik)),redaksiList:()=>pageList("Kabar Redaksi",pubTerbit().slice().sort((a,b)=>b.terbit-a.terbit)),cari:pageCari,baca:pageArticle,direktori:pageDirektori,peluang:pagePeluang,agenda:pageAgenda,pedoman:pagePedoman,gabung:pageGabung,admin:pageAdmin};
   m.innerHTML=(V[S.view]||pageHome)();
   bindOpen(m);bindCopies(m);
   m.querySelectorAll("[data-goto]").forEach(b=>b.onclick=()=>go(b.dataset.goto,{tab:b.dataset.gtab}));
   const more=$("#more");if(more)more.onclick=()=>{S.limit+=10;const y=scrollY;render();scrollTo(0,y);};
+  m.querySelectorAll("[data-kabar]").forEach(b=>b.onclick=()=>{S.view="redaksiList";S.limit=10;render();window.scrollTo(0,0);});
   m.querySelectorAll("[data-crumb]").forEach(b=>b.onclick=()=>b.dataset.crumb==="home"?go("home"):go("rubrik",{rubrik:b.dataset.crumb}));
   m.querySelectorAll("[data-also]").forEach(b=>b.onclick=()=>go("baca",{id:b.dataset.also}));
   const sh=$("#share");if(sh)sh.onclick=async()=>{const a=warga().find(x=>x.id===S.artId);try{await navigator.clipboard.writeText(a.judul+" — Sinergi Connect");sh.textContent="Tersalin";}catch(e){sh.textContent="Gagal menyalin";}};
