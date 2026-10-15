@@ -1,0 +1,11 @@
+{
+  "name": "sinergi-connect",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Sinergi Connect — Portal Ekosistem Koperasi & UMKM (versi Netlify)",
+  "dependencies": {
+    "@netlify/blobs": "^10.7.0"
+  },
+  "engines": { "node": ">=20" }
+}

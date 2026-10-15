@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin Berita · Sinergi Connect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
+<style>
+:root{--paper:#F5F7FB;--surface:#fff;--ink:#0E1A33;--muted:#5C6884;--line:#E4E9F2;--soft:#EEF3FD;--gold:#D6A738;--gold-ink:#1A1404;
+  --grad-royal:linear-gradient(135deg,#0C1D44 0%,#16306E 50%,#2550C2 100%);--grad-gold:linear-gradient(135deg,#F3D47E 0%,#D6A738 48%,#B3861C 100%);
+  --ok:#1D7A49;--okbg:#E2F3E9;--bad:#B42318;--badbg:#FDE8E5;--warn:#8A5A00;--warnbg:#FBF0D8;--shadow:0 1px 2px rgba(14,26,51,.05),0 12px 32px -14px rgba(22,48,110,.22);
+  --head:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--disp:"Fraunces",Georgia,serif;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 var(--head);padding-bottom:env(safe-area-inset-bottom,0px)}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{background:var(--grad-royal);color:#fff;position:relative}
+header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--grad-gold)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:16px;flex-wrap:wrap}
+header b{font-family:var(--disp);font-size:22px}header b span{color:#F3D47E}
+header small{display:block;color:#C9D4EA;font-size:12px}
+.hb{display:flex;gap:8px;flex-wrap:wrap}
+.hb a,.hb button{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:999px;padding:7px 14px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none}
+main{padding-block:24px 48px}
+.grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px;align-items:start}
+@media(max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow)}
+h2{margin:0;font-family:var(--disp);font-size:22px}
+form.f{display:grid;gap:13px}
+label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700}
+label small{font-weight:400;color:var(--muted)}
+input[type=text],input[type=password],input[type=datetime-local],select,textarea{border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:11px 13px;font:inherit;font-size:16px;width:100%}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(214,167,56,.15)}
+textarea{min-height:260px;resize:vertical;font-family:Georgia,serif;font-size:16px;line-height:1.6}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:13px}@media(max-width:560px){.row2{grid-template-columns:1fr}}
+.btn{background:var(--grad-gold);color:var(--gold-ink);border:0;border-radius:999px;padding:11px 22px;font:inherit;font-weight:800;cursor:pointer;min-height:44px}
+.btn.ghost{background:var(--surface);border:1px solid var(--line);color:var(--ink)}
+.btn.danger{background:var(--surface);border:1px solid var(--bad);color:var(--bad)}
+.btn.s{padding:6px 12px;font-size:12.5px;min-height:34px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.msg{padding:10px 14px;border-radius:12px;font-size:14px}.msg.ok{background:var(--okbg);color:var(--ok)}.msg.bad{background:var(--badbg);color:var(--bad)}
+.drop{border:2px dashed var(--line);border-radius:14px;padding:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--paper)}
+.prev{width:200px;max-width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+.check{flex-direction:row;align-items:center;gap:8px;font-weight:400}
+.list{display:flex;flex-direction:column;gap:10px}
+.item{display:flex;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:var(--shadow)}
+.item img,.item .ph{width:110px;aspect-ratio:16/9;object-fit:cover;border-radius:10px;flex:none;background:var(--soft)}
+.item .bd{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+.item h3{margin:0;font-size:15px;line-height:1.3}
+.meta{font-size:12px;color:var(--muted)}
+.pill{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px}
+.pill.on{background:var(--okbg);color:var(--ok)}.pill.wait{background:var(--warnbg);color:var(--warn)}
+.acts{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.login{max-width:400px;margin:56px auto}
+.kom{border-bottom:1px solid var(--line);padding-block:10px}
+.kom p{margin:4px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.empty{text-align:center;color:var(--muted);padding:20px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div><b>Sinergi <span>Connect</span></b><small>Panel Admin Berita · Portal Ekosistem Koperasi &amp; UMKM</small></div>
+  <div class="hb" id="hb" hidden><a href="/" target="_blank" rel="noopener">Lihat portal ↗</a><button id="keluar">Keluar</button></div></div></header>
+<main class="wrap">
+  <div id="flash"></div>
+
+  <section id="v-login" class="panel login" hidden>
+    <h2 style="margin-bottom:14px">Masuk Admin</h2>
+    <form class="f" id="f-login">
+      <label for="l-user">Nama pengguna<input type="text" id="l-user" autocomplete="username" required></label>
+      <label for="l-pass">Kata sandi<input type="password" id="l-pass" autocomplete="current-password" required></label>
+      <button class="btn" type="submit" id="l-btn">Masuk</button>
+    </form>
+  </section>
+
+  <section id="v-app" hidden>
+    <div class="panel" id="mod" hidden style="margin-bottom:22px"></div>
+    <div class="grid">
+      <div class="panel">
+        <div class="acts" style="justify-content:space-between;margin-bottom:12px"><h2 id="f-judul">Tulis berita baru</h2><button class="btn ghost s" id="batal" hidden type="button">Batal sunting</button></div>
+        <form class="f" id="f-berita" novalidate>
+          <input type="hidden" id="b-id">
+          <label for="b-judul">Judul berita<input type="text" id="b-judul" maxlength="160"></label>
+          <div class="row2">
+            <label for="b-rubrik">Rubrik<select id="b-rubrik"></select></label>
+            <label for="b-lokasi">Lokasi (dateline)<input type="text" id="b-lokasi" maxlength="40" placeholder="Contoh: JAKARTA"></label>
+          </div>
+          <div class="row2">
+            <label for="b-tgl">Tanggal &amp; jam terbit (WIB) <small>isi waktu mendatang untuk menjadwalkan</small><input type="datetime-local" id="b-tgl"></label>
+            <label for="b-penulis">Penulis<input type="text" id="b-penulis" maxlength="60" value="Redaksi Sinergi Connect"></label>
+          </div>
+          <div><label for="b-gambar">Gambar utama <small id="g-help">JPG/PNG/WebP. Diperkecil otomatis ke lebar 1600 px.</small></label>
+            <div class="drop"><img id="prev" class="prev" alt="Pratinjau gambar" hidden><input type="file" id="b-gambar" accept="image/jpeg,image/png,image/webp">
+              <label class="check" for="b-hapus" id="hapus-wrap" hidden><input type="checkbox" id="b-hapus"> Hapus gambar</label></div></div>
+          <label for="b-ket">Keterangan gambar<input type="text" id="b-ket" maxlength="160" placeholder="Siapa/apa dalam gambar, lokasi, sumber foto"></label>
+          <label for="b-isi">Isi berita <small>Pisahkan paragraf dengan baris kosong. Awali baris dengan ## untuk subjudul. Tautan: [teks](https://…)</small><textarea id="b-isi"></textarea></label>
+          <label for="b-rujukan">Narasumber / rujukan <small>opsional</small><input type="text" id="b-rujukan" maxlength="200"></label>
+          <div class="acts"><button class="btn" type="submit" id="simpan">Terbitkan berita</button><span id="f-msg"></span></div>
+        </form>
+      </div>
+      <div>
+        <div class="acts" style="justify-content:space-between;margin-bottom:12px"><h2>Daftar berita <span id="jml" class="meta"></span></h2></div>
+        <input type="text" id="cari" placeholder="Cari judul…" aria-label="Cari judul" style="margin-bottom:12px">
+        <div class="list" id="daftar"><div class="empty">Memuat…</div></div>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const TZ="Asia/Jakarta";
+const tgl=ms=>new Intl.DateTimeFormat("id-ID",{timeZone:TZ,day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"}).format(ms)+" WIB";
+const keInput=ms=>{const d=new Date(ms);return new Intl.DateTimeFormat("en-CA",{timeZone:TZ}).format(d)+"T"+new Intl.DateTimeFormat("en-GB",{timeZone:TZ,hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(d);};
+const S={items:[],rubrik:[],edit:null,gambarBaru:null};
+function flash(t,k="ok"){$("#flash").innerHTML=t?`<div class="msg ${k}" style="margin-bottom:16px">${esc(t)}</div>`:"";if(t)window.scrollTo({top:0,behavior:"smooth"});}
+async function api(path,opt={}){
+  const r=await fetch("/api/admin/"+path,{credentials:"same-origin",...opt,headers:{...(opt.headers||{}),...(opt.method&&opt.method!=="GET"?{"x-sc-admin":"1"}:{})}});
+  const j=await r.json().catch(()=>({error:"Server tidak merespons dengan benar."}));
+  if(r.status===401&&path!=="masuk"){tampil(false);}
+  if(!r.ok)throw new Error(j.error||"Permintaan gagal.");
+  return j;
+}
+function tampil(masuk){$("#v-login").hidden=masuk;$("#v-app").hidden=!masuk;$("#hb").hidden=!masuk;}
+async function mulai(){
+  try{const s=await fetch("/api/admin/sesi",{credentials:"same-origin"}).then(r=>r.json());
+    if(!s.siap)flash("Panel admin belum dikonfigurasi. Atur ADMIN_USER, ADMIN_PASS, dan SESSION_SECRET di Netlify (Site configuration → Environment variables), lalu deploy ulang.","bad");
+    tampil(!!s.masuk);if(s.masuk)muat();}
+  catch(e){tampil(false);flash("Fungsi admin belum aktif. Pastikan situs di-deploy bersama folder netlify/functions.","bad");}
+}
+$("#f-login").addEventListener("submit",async e=>{e.preventDefault();$("#l-btn").disabled=true;
+  try{await api("masuk",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({user:$("#l-user").value,pass:$("#l-pass").value})});flash("");tampil(true);muat();}
+  catch(err){flash(err.message,"bad");}finally{$("#l-btn").disabled=false;$("#l-pass").value="";}});
+$("#keluar").onclick=async()=>{try{await api("keluar",{method:"POST"});}catch(e){}tampil(false);};
+
+async function muat(){
+  try{const j=await api("berita");S.items=j.items;S.rubrik=j.rubrik;
+    if(!$("#b-rubrik").options.length)$("#b-rubrik").innerHTML=S.rubrik.map(r=>`<option>${esc(r)}</option>`).join("");
+    if(!S.edit&&!$("#b-tgl").value)$("#b-tgl").value=keInput(Date.now());
+    daftar();}
+  catch(e){flash(e.message,"bad");}
+}
+function daftar(){
+  const q=$("#cari").value.toLowerCase();const kini=Date.now();
+  const list=S.items.filter(b=>!q||b.judul.toLowerCase().includes(q));
+  $("#jml").textContent=`(${S.items.length})`;
+  $("#daftar").innerHTML=list.length?list.map(b=>`<div class="item">${b.gambarUrl?`<img src="${esc(b.gambarUrl)}" alt="" loading="lazy">`:`<div class="ph"></div>`}
+    <div class="bd"><div class="acts"><span class="pill ${b.terbit<=kini?"on":"wait"}">${b.terbit<=kini?"Tayang":"Terjadwal"}</span><span class="meta"><b>${esc(b.rubrik)}</b></span></div>
+    <h3>${esc(b.judul)}</h3><span class="meta">${tgl(b.terbit)} · ${esc(b.penulis)}</span>
+    <span class="meta">Suka ${b.suka} · Tidak suka ${b.tidakSuka} · Komentar ${b.komentar}</span>
+    <div class="acts"><button class="btn ghost s" data-edit="${b.id}">Sunting</button><button class="btn ghost s" data-kom="${b.id}">Komentar</button>
+      ${b.terbit<=kini?`<a class="btn ghost s" href="/#b-r${b.id}" target="_blank" rel="noopener" style="text-decoration:none">Lihat ↗</a>`:""}
+      <button class="btn danger s" data-del="${b.id}">Hapus</button></div></div></div>`).join(""):`<div class="panel empty">Belum ada berita. Tulis berita pertama melalui formulir.</div>`;
+  document.querySelectorAll("[data-edit]").forEach(x=>x.onclick=()=>sunting(x.dataset.edit));
+  document.querySelectorAll("[data-kom]").forEach(x=>x.onclick=()=>moderasi(x.dataset.kom));
+  document.querySelectorAll("[data-del]").forEach(x=>x.onclick=async()=>{
+    if(!confirm("Hapus berita ini beserta gambar dan komentarnya? Tindakan ini tidak dapat dibatalkan."))return;
+    x.disabled=true;try{await api("berita?id="+x.dataset.del,{method:"DELETE"});flash("Berita dihapus.");if(S.edit===x.dataset.del)reset();muat();}catch(e){flash(e.message,"bad");x.disabled=false;}});
+}
+$("#cari").oninput=daftar;
+function reset(){S.edit=null;S.gambarBaru=null;$("#f-berita").reset();$("#b-id").value="";$("#b-penulis").value="Redaksi Sinergi Connect";$("#b-tgl").value=keInput(Date.now());
+  $("#prev").hidden=true;$("#hapus-wrap").hidden=true;$("#f-judul").textContent="Tulis berita baru";$("#simpan").textContent="Terbitkan berita";$("#batal").hidden=true;$("#f-msg").innerHTML="";}
+$("#batal").onclick=reset;
+function sunting(id){const b=S.items.find(x=>x.id===id);if(!b)return;S.edit=id;S.gambarBaru=null;
+  $("#b-id").value=b.id;$("#b-judul").value=b.judul;$("#b-rubrik").value=b.rubrik;$("#b-lokasi").value=b.lokasi;$("#b-tgl").value=keInput(b.terbit);
+  $("#b-penulis").value=b.penulis;$("#b-ket").value=b.ketFoto||"";$("#b-isi").value=b.isi;$("#b-rujukan").value=b.rujukan||"";$("#b-gambar").value="";
+  if(b.gambarUrl){$("#prev").src=b.gambarUrl;$("#prev").hidden=false;$("#hapus-wrap").hidden=false;}else{$("#prev").hidden=true;$("#hapus-wrap").hidden=true;}
+  $("#b-hapus").checked=false;$("#f-judul").textContent="Sunting berita";$("#simpan").textContent="Simpan perubahan";$("#batal").hidden=false;window.scrollTo({top:0,behavior:"smooth"});}
+function kecilkan(file){return new Promise((res,rej)=>{const url=URL.createObjectURL(file);const im=new Image();
+  im.onload=()=>{const w=Math.min(1600,im.naturalWidth),h=Math.round(im.naturalHeight*w/im.naturalWidth);const c=document.createElement("canvas");c.width=w;c.height=h;
+    const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,w,h);x.drawImage(im,0,0,w,h);URL.revokeObjectURL(url);c.toBlob(b=>b?res(b):rej(new Error("gagal")),"image/jpeg",.85);};
+  im.onerror=()=>{URL.revokeObjectURL(url);rej(new Error("format"));};im.src=url;});}
+$("#b-gambar").addEventListener("change",async e=>{const f=e.target.files[0];S.gambarBaru=null;if(!f)return;
+  try{S.gambarBaru=await kecilkan(f);$("#prev").src=URL.createObjectURL(S.gambarBaru);$("#prev").hidden=false;$("#f-msg").innerHTML="";}
+  catch(err){$("#f-msg").innerHTML=`<span class="msg bad">Gambar tidak dapat diproses. Gunakan JPG, PNG, atau WebP.</span>`;e.target.value="";}});
+$("#f-berita").addEventListener("submit",async e=>{e.preventDefault();const m=$("#f-msg");
+  const fd=new FormData();
+  const v={id:$("#b-id").value,judul:$("#b-judul").value.trim(),rubrik:$("#b-rubrik").value,lokasi:$("#b-lokasi").value.trim(),tanggal:$("#b-tgl").value,
+    penulis:$("#b-penulis").value.trim(),ket:$("#b-ket").value.trim(),isi:$("#b-isi").value.trim(),rujukan:$("#b-rujukan").value.trim()};
+  if(!v.judul||!v.lokasi||!v.isi||!v.tanggal){m.innerHTML=`<span class="msg bad">Lengkapi judul, lokasi, tanggal, dan isi berita.</span>`;return;}
+  const lama=S.edit&&S.items.find(x=>x.id===S.edit);
+  const adaGambar=S.gambarBaru||(lama&&lama.gambar&&!$("#b-hapus").checked);
+  if(!adaGambar){m.innerHTML=`<span class="msg bad">Tambahkan gambar utama.</span>`;return;}
+  if(!v.ket){m.innerHTML=`<span class="msg bad">Tambahkan keterangan gambar.</span>`;return;}
+  Object.entries(v).forEach(([k,x])=>fd.append(k,x));
+  if($("#b-hapus").checked)fd.append("hapus_gambar","1");
+  if(S.gambarBaru)fd.append("gambar",S.gambarBaru,"gambar.jpg");
+  $("#simpan").disabled=true;m.innerHTML=`<span class="meta">Menyimpan…</span>`;
+  try{const j=await api("berita",{method:"POST",body:fd});
+    flash(j.terjadwal?`Tersimpan dan terjadwal tayang ${tgl(j.item.terbit)}.`:(S.edit?"Perubahan tersimpan.":"Berita terbit."));reset();muat();}
+  catch(err){m.innerHTML=`<span class="msg bad">${esc(err.message)}</span>`;}finally{$("#simpan").disabled=false;}});
+async function moderasi(id){const b=S.items.find(x=>x.id===id);const box=$("#mod");box.hidden=false;box.innerHTML=`<div class="empty">Memuat komentar…</div>`;window.scrollTo({top:0,behavior:"smooth"});
+  try{const j=await api("komentar?id="+id);
+    box.innerHTML=`<div class="acts" style="justify-content:space-between"><h2 style="font-size:19px">Komentar: ${esc(b?b.judul:"")}</h2><button class="btn ghost s" id="tutup">Tutup</button></div>
+      ${j.komentar.length?j.komentar.map(k=>`<div class="kom"><div class="acts" style="justify-content:space-between"><span><b>${esc(k.nama)}</b> <span class="meta">· ${tgl(k.waktu)}</span></span><button class="btn danger s" data-kdel="${k.id}">Hapus</button></div><p>${esc(k.teks)}</p></div>`).join(""):`<p class="meta">Belum ada komentar.</p>`}`;
+    $("#tutup").onclick=()=>{box.hidden=true;};
+    box.querySelectorAll("[data-kdel]").forEach(x=>x.onclick=async()=>{if(!confirm("Hapus komentar ini?"))return;x.disabled=true;
+      try{await api(`komentar?id=${id}&cid=${x.dataset.kdel}`,{method:"DELETE"});moderasi(id);muat();}catch(e){flash(e.message,"bad");x.disabled=false;}});}
+  catch(e){box.innerHTML=`<p class="msg bad">${esc(e.message)}</p>`;}}
+mulai();
+</script>
+</body>
+</html>
